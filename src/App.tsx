@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import TodoList from "./components/TodoList";
 
 const App = () => {
-  return <Container>yo</Container>;
+  return (
+    <Container>
+      <TodoList />
+    </Container>
+  );
 };
 
 export default App;
 
 const Container = styled.div`
-  color: red;
+  width: 100%;
+  min-height: 100vh;
 `;
