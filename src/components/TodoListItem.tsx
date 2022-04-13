@@ -1,58 +1,36 @@
-import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { removeTodo, selectTodo, toggleTodo } from "../features/todo/todoSlice";
+import { FC } from "react";
+import styled from "styled-components";
+import { useAppSelector } from "../app/hooks";
+import { selectFilter, selectTodo } from "../features/todo/todoSlice";
+import SingleTodo from "./SingleTodo";
 
-const CompletedTodos = () => {
-  const todos = useAppSelector((state) => state.todo.todos);
-  const dispatch = useAppDispatch();
-
-  return (
-    <div>
-      <h1>Completed Todos</h1>
-      {todos
-        .filter((todo) => todo.completed)
-        .map((todo) => (
-          <div key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => dispatch(toggleTodo(todo.id))}
-            />
-            <span>{todo.text}</span>
-            <button onClick={() => dispatch(removeTodo(todo.id))}>
-              Remove
-            </button>
-          </div>
-        ))}
-    </div>
-  );
-};
-
-const TodoListItem = () => {
+const TodoListItem: FC = () => {
   const todos = useAppSelector(selectTodo);
-  const dispatch = useAppDispatch();
+  const filter = useAppSelector(selectFilter);
 
   return (
-    <>
-      <div>
-        {todos
-          .filter((todo) => !todo.completed)
-          .map((todo) => (
-            <div key={todo.id}>
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => dispatch(toggleTodo(todo.id))}
-              />
-              <span>{todo.text}</span>
-              <button onClick={() => dispatch(removeTodo(todo.id))}>
-                Remove
-              </button>
-            </div>
-          ))}
-      </div>
-      <CompletedTodos />
-    </>
+    <Container>
+      {filter === "all"
+        ? todos.map((todo) => <SingleTodo key={todo.id} todo={todo} />)
+        : filter === "active"
+        ? todos
+            .filter((todo) => !todo.completed)
+            .map((todo) => <SingleTodo key={todo.id} todo={todo} />)
+        : todos
+            .filter((todo) => todo.completed)
+            .map((todo) => <SingleTodo key={todo.id} todo={todo} />)}
+    </Container>
   );
 };
 
 export default TodoListItem;
+
+const Container = styled.div`
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 5px;
+`;
