@@ -57,5 +57,11 @@ export const {
 
 export const selectTodo = (state: RootState) => state.todo.todos;
 export const selectFilter = (state: RootState) => state.todo.filter;
+export const getActiveTodosCount = (state: RootState) => {
+  return state.todo.todos.filter((todo) => !todo.completed).length;
+};
+export const getCompletedTodoCount = (state: RootState) => {
+  return state.todo.todos.filter((todo) => todo.completed).length;
+};
 
 export default todoSlice.reducer;

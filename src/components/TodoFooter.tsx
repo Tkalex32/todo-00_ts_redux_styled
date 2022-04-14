@@ -1,66 +1,51 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
+import {
+  getCompletedTodoCount,
+  getActiveTodosCount,
+} from "../features/todo/todoSlice";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { useAppDispatch } from "../app/hooks";
-import {
-  toggleFilter,
-  getCompletedTodoCount,
-} from "../features/todo/todoSlice";
+import Modal from "./Modal";
 
-const TodoFilter: FC = () => {
-  const dispatch = useAppDispatch();
-  const [filter, setFilter] = useState<Filter>("all");
-  const todosCount = useSelector(getCompletedTodoCount);
-
-  useEffect(() => {
-    dispatch(toggleFilter(filter));
-  }, [filter]);
+const TodoFooter: FC = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const todosCount = useSelector(getActiveTodosCount);
+  const completedCount = useSelector(getCompletedTodoCount);
+  const itemSpec = todosCount <= 1 ? "item" : "items";
 
   return (
     <Container>
-      <Filters>
-        <Button onClick={() => setFilter("all")} active={filter === "all"}>
-          All
+      <ItemText>
+        {todosCount} {itemSpec} left, {completedCount} completed
+      </ItemText>
+      {completedCount > 0 && (
+        <Button active={true} onClick={() => setShowModal(true)}>
+          Clear Completed
         </Button>
-        <Button
-          onClick={() => setFilter("active")}
-          active={filter === "active"}
-        >
-          Active
-        </Button>
-        <Button
-          disabled={todosCount === 0}
-          onClick={() => setFilter("completed")}
-          active={filter === "completed"}
-        >
-          Completed
-        </Button>
-      </Filters>
+      )}
+      {showModal && <Modal setShowModal={setShowModal} type="completed" />}
     </Container>
   );
 };
 
-export default TodoFilter;
+export default TodoFooter;
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-const Filters = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   height: 24px;
-  background: #dee2e7;
-  box-shadow: inset 0px 0px 10px 1px rgba(65, 69, 93, 0.1);
-  border-radius: 10px;
-  padding: 2px;
-  box-sizing: content-box;
+  border-top: 1px solid #e6e6e6;
+  padding-top: 20px;
+  //background: #dee2e7;
+  //box-shadow: inset 0px 0px 10px 1px rgba(65, 69, 93, 0.1);
+`;
+
+const ItemText = styled.span`
+  font-size: 12px;
+  color: #868e96;
+  font-weight: 500;
 `;
 
 interface IButtonProps {
