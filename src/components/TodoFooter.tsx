@@ -36,15 +36,13 @@ const Container = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 24px;
-  border-top: 1px solid #e6e6e6;
+  border-top: 1px solid var(--quaternary);
   padding-top: 20px;
-  //background: #dee2e7;
-  //box-shadow: inset 0px 0px 10px 1px rgba(65, 69, 93, 0.1);
 `;
 
 const ItemText = styled.span`
   font-size: 12px;
-  color: #868e96;
+  color: var(--secondary);
   font-weight: 500;
 `;
 
@@ -59,12 +57,13 @@ const Button = styled.button<IButtonProps>`
   font-weight: 600;
   font-size: 13px;
   line-height: 12px;
+  text-transform: uppercase;
   letter-spacing: -0.08px;
   color: ${({ active }) => (active ? "#4caf50" : "#828282")};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   text-align: center;
   min-width: 90px;
-  background: ${({ active }) => (active ? "#fff" : "transparent")};
+  background: ${({ active }) => (active ? "var(--primary)" : "transparent")};
   border: ${({ active }) =>
     active ? "0.5px solid rgba(0, 0, 0, 0.05)" : "none"};
   box-shadow: ${({ active }) =>
@@ -76,7 +75,8 @@ const Button = styled.button<IButtonProps>`
 
   &:hover {
     color: ${({ disabled }) => (disabled ? "#828282" : "#f09009")};
-    background-color: ${({ disabled }) => (disabled ? "transparent" : "#fff")};
+    background-color: ${({ disabled }) =>
+      disabled ? "transparent" : "var(--primary)"};
     border: ${({ disabled }) =>
       !disabled ? "0.5px solid rgba(0, 0, 0, 0.05)" : "none"};
     box-shadow: ${({ disabled }) =>

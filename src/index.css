@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,600;0,800;1,200;1,300;1,400;1,600&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Sans+Pro:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,600;0,800;1,200;1,300;1,400;1,600&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Saira+Condensed:wght@200;300;400;500&family=Source+Sans+Pro:wght@300;400;600&display=swap");
 
 * {
   padding: 0;
@@ -7,6 +7,58 @@
 }
 
 body {
+  --color-bg: hsl(0, 0%, 94%);
+  --color-item: rgba(240, 242, 245, 1);
+  --color-text: rgba(93, 108, 126, 1);
+  --color-input: hsl(0, 0%, 52%);
+  --input: rgb(255, 255, 255);
+  --switch-bg: rgb(222 226 231);
+  --button: linear-gradient(146.45deg, #ffffff 14.49%, #cbd0d9 85.19%);
+  --button-hover: linear-gradient(146.45deg, #cbd0d9 14.49%, #ffffff 85.19%);
+  --button-circle1: linear-gradient(
+    180deg,
+    rgba(153, 160, 169, 0.4) 0%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  --button-circle2: linear-gradient(146.45deg, #ffffff 14.49%, #cbd0d9 85.19%);
+
+  --primary: rgb(255, 255, 255);
+  --secondary: rgba(60, 60, 67, 0.6);
+  --tertiary: rgba(60, 60, 67, 0.3);
+  --quaternary: rgba(60, 60, 67, 0.18);
+
+  --shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  --shadow2: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --inner-shadow: inset 0px 0px 10px 1px rgba(65, 69, 93, 0.1);
+  --modal-icon-border: 10px solid rgba(0, 0, 0, 0.5);
   font-family: "Roboto", sans-serif;
   font-size: 16px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: all 0.3s linear;
+}
+
+body.dark {
+  --color-bg: hsl(207, 26%, 17%);
+  --color-item: rgba(43, 57, 69, 1);
+  --color-text: rgba(243, 246, 252, 1);
+  --color-input: hsl(0, 0%, 30%);
+  --input: rgba(235, 235, 245, 0.1);
+  --switch-bg: #1e2830;
+  --button: linear-gradient(146.45deg, #55616a 14.49%, #222e37 85.19%);
+  --button-hover: linear-gradient(146.45deg, #222e37 14.49%, #55616a 85.19%);
+  --button-circle1: linear-gradient(180deg, #222e37 0%, #55616a 100%);
+  --button-circle2: linear-gradient(146.45deg, #55616a 14.49%, #222e37 85.19%);
+
+  --primary: rgba(235, 235, 245, 0.1);
+  --secondary: rgba(235, 235, 245, 0.6);
+  --tertiary: rgba(235, 235, 245, 0.3);
+  --quaternary: rgba(235, 235, 245, 0.18);
+
+  --shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+  --shadow2: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  --inner-shadow: inset 0px 0px 10px 1px rgba(65, 69, 93, 0.1);
+  --modal-icon-border: 10px solid rgb(16, 22, 27);
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }

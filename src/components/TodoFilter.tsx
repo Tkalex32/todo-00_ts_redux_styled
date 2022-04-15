@@ -56,8 +56,8 @@ const Filters = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 24px;
-  background: #dee2e7;
-  box-shadow: inset 0px 0px 10px 1px rgba(65, 69, 93, 0.1);
+  background: var(--switch-bg);
+  box-shadow: var(--inner-shadow);
   border-radius: 10px;
   padding: 2px;
   box-sizing: content-box;
@@ -70,6 +70,7 @@ interface IButtonProps {
 
 const Button = styled.button<IButtonProps>`
   font-family: "Source Sans Pro", sans-serif;
+  text-transform: uppercase;
   font-style: normal;
   font-weight: 600;
   font-size: 13px;
@@ -79,7 +80,7 @@ const Button = styled.button<IButtonProps>`
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   text-align: center;
   min-width: 90px;
-  background: ${({ active }) => (active ? "#fff" : "transparent")};
+  background: ${({ active }) => (active ? "var(--primary)" : "transparent")};
   border: ${({ active }) =>
     active ? "0.5px solid rgba(0, 0, 0, 0.05)" : "none"};
   box-shadow: ${({ active }) =>
@@ -91,7 +92,8 @@ const Button = styled.button<IButtonProps>`
 
   &:hover {
     color: ${({ disabled }) => (disabled ? "#828282" : "#f09009")};
-    background-color: ${({ disabled }) => (disabled ? "transparent" : "#fff")};
+    background-color: ${({ disabled }) =>
+      disabled ? "transparent" : "var(--primary)"};
     border: ${({ disabled }) =>
       !disabled ? "0.5px solid rgba(0, 0, 0, 0.05)" : "none"};
     box-shadow: ${({ disabled }) =>

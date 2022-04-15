@@ -1,5 +1,5 @@
 import { nanoid } from "@reduxjs/toolkit";
-import { FC, FormEvent, useRef, useState } from "react";
+import { FC, FormEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch } from "../app/hooks";
 import { addTodo } from "../features/todo/todoSlice";
@@ -9,8 +9,36 @@ import TodoListItem from "./TodoListItem";
 
 const TodoList: FC = () => {
   const [todo, setTodo] = useState<string>("");
+  const [mode, setMode] = useState<string>("light");
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
+  const icon: string = mode === "light" ? "dark_mode" : "light_mode";
+
+  useEffect(() => {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) =>
+        onSelectMode(e.matches ? "dark" : "light")
+      );
+
+    onSelectMode(
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+    );
+
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", () => {});
+    };
+  }, []);
+
+  const onSelectMode = (mode: string) => {
+    setMode(mode);
+    if (mode === "dark") document.body.classList.add("dark");
+    else document.body.classList.remove("dark");
+  };
 
   const addTodoItem = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,10 +51,12 @@ const TodoList: FC = () => {
     <Container>
       <Header>
         <Title>Todos</Title>
-        <IconWrapper>
+        <IconWrapper
+          onClick={() => onSelectMode(mode === "light" ? "dark" : "light")}
+        >
           <InnerWrapper>
-            <InnerInner>
-              <DarkModeIcon>dark_mode</DarkModeIcon>
+            <InnerInner mode={mode}>
+              <DarkModeIcon>{icon}</DarkModeIcon>
             </InnerInner>
           </InnerWrapper>
         </IconWrapper>
@@ -50,7 +80,7 @@ const TodoList: FC = () => {
 export default TodoList;
 
 const Container = styled.div`
-  background-color: #eff1f5;
+  background-color: var(--color-item);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -58,7 +88,8 @@ const Container = styled.div`
   justify-content: flex-start;
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
+  transition: all 0.3s linear;
 
   & ::placeholder {
     color: #b3b3b3;
@@ -78,13 +109,8 @@ const Title = styled.h1`
   font-size: 32px;
   font-weight: bold;
   letter-spacing: 0.08em;
-  //color: #828282;
-  background-color: #565656;
-  color: transparent;
-  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
+  color: var(--color-text);
+  transition: all 0.3s linear;
 `;
 
 const IconWrapper = styled.div`
@@ -94,12 +120,9 @@ const IconWrapper = styled.div`
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(
-    180deg,
-    rgba(153, 160, 169, 0.4) 0%,
-    rgba(255, 255, 255, 0.4) 100%
-  );
+  background: var(--button-circle1);
   box-shadow: 4px 4px 20px rgba(142, 155, 174, 0.1);
+  transition: all 0.3s linear;
 `;
 
 const InnerWrapper = styled.div`
@@ -109,22 +132,28 @@ const InnerWrapper = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: linear-gradient(146.45deg, #ffffff 14.49%, #cbd0d9 85.19%);
+  background: var(--button-circle2);
+  transition: all 0.3s linear;
 `;
 
-const InnerInner = styled.div`
+interface InnerInnerProps {
+  mode: string;
+}
+
+const InnerInner = styled.div<InnerInnerProps>`
   width: 28px;
   height: 28px;
-  background: linear-gradient(146.45deg, #ffffff 14.49%, #cbd0d9 85.19%);
+  background: var(--button);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #f09009;
+  color: ${(props) => (props.mode === "light" ? "#f09009;" : "yellow")};
+  transition: all 0.3s linear;
 
   &:hover {
-    background: linear-gradient(146.45deg, #cbd0d9 14.49%, #ffffff 85.19%);
+    background: var(--button-hover);
   }
 `;
 
@@ -157,6 +186,8 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
+  background: var(--input);
+  color: var(--secondary);
   width: 100%;
   height: 40px;
   border-radius: 10px;
@@ -165,5 +196,6 @@ const Input = styled.input`
   font-size: 16px;
   outline: none;
   margin-bottom: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
+  transition: all 0.3s linear;
 `;

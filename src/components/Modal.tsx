@@ -66,7 +66,7 @@ const ModalContent = styled.div`
   position: relative;
   width: 400px;
   height: 200px;
-  background-color: #fff;
+  background-color: var(--color-item);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@ const ModalIconWrapper = styled.div`
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
   border-bottom: none;
-  border: 10px solid rgba(0, 0, 0, 0.5);
+  border: var(--modal-icon-border);
   background-color: white;
   backdrop-filter: blur(5px);
 `;
@@ -105,7 +105,7 @@ const ModalIconInner = styled.div`
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(146.45deg, #ffffff 14.49%, #cbd0d9 85.19%);
+  background: var(--button);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,7 +137,7 @@ const ModalIcon = styled.span`
 const ModalText = styled.p`
   font-size: 14px;
   font-weight: 400;
-  color: #828282;
+  color: var(--color-text);
   margin-bottom: 20px;
 `;
 
@@ -155,7 +155,7 @@ const ModalButton = styled.span<ModalButtonProps>`
   align-self: end;
   font-size: 15px;
   font-weight: 400;
-  color: ${(props) => (props.delete ? "#fff" : "#fff")};
+  color: #fff;
   background-color: ${(props) => (props.delete ? "#eb2424" : "#828282")};
   cursor: pointer;
   text-align: center;

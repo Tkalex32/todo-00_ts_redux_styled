@@ -88,29 +88,32 @@ const Checkbox = styled.div<ICheckedProps>`
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  background-color: ${(props) => (props.checked ? "#4caf50" : "#fff")};
+  border: 1px solid var(--quaternary);
+  background-color: ${(props) => (props.checked ? "#4caf50" : "var(--input)")};
   background-image: ${(props) =>
     props.checked ? `url(${iconCheck})` : "#fff"};
   background-repeat: no-repeat;
   background-position: center;
   background-size: 15px;
   flex: 0 0 auto;
+  transition: all 0.3s linear;
 `;
 
 const TodoInput = styled.input`
   width: 100%;
   height: 40px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--quaternary);
   border-radius: 10px;
   padding: 0 10px;
   font-size: 16px;
   outline: none;
-  color: #333;
+  background: var(--input);
+  color: var(--secondary);
+  transition: all 0.3s linear;
 `;
 
 const TodoText = styled.span<ICheckedProps>`
-  color: ${(props) => (props.theme.dark ? "#fff" : "#828282;")};
+  color: var(--secondary);
   text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
   cursor: ${(props) => (props.checked ? "default" : "pointer")};
   flex: 1;
@@ -123,12 +126,9 @@ const IconWrapper = styled.div`
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(
-    180deg,
-    rgba(153, 160, 169, 0.4) 0%,
-    rgba(255, 255, 255, 0.4) 100%
-  );
+  background: var(--button-circle1);
   box-shadow: 4px 4px 20px rgba(142, 155, 174, 0.1);
+  transition: all 0.3s linear;
   flex: 0 0 auto;
 `;
 
@@ -139,22 +139,23 @@ const InnerWrapper = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: linear-gradient(146.45deg, #ffffff 14.49%, #cbd0d9 85.19%);
+  background: var(--button-circle2);
+  transition: all 0.3s linear;
 `;
 
 const InnerInner = styled.div`
   width: 28px;
   height: 28px;
-  background: linear-gradient(146.45deg, #ffffff 14.49%, #cbd0d9 85.19%);
+  background: var(--button);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #f00909;
+  color: #f83939;
 
   &:hover {
-    background: linear-gradient(146.45deg, #cbd0d9 14.49%, #ffffff 85.19%);
+    background: var(--button-hover);
   }
 `;
 
@@ -183,11 +184,11 @@ const Form = styled.form`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--quaternary);
   padding: 2px;
 
   &:hover {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow2);
     ${IconWrapper} {
       display: flex;
     }
