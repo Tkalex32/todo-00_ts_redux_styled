@@ -90,10 +90,6 @@ const Container = styled.div`
   border-radius: 20px;
   box-shadow: var(--shadow);
   transition: all 0.3s linear;
-
-  & ::placeholder {
-    color: #b3b3b3;
-  }
 `;
 
 const Header = styled.div`
@@ -196,6 +192,10 @@ const Input = styled.input`
   font-size: 16px;
   outline: none;
   margin-bottom: 10px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--inner-shadow2);
   transition: all 0.3s linear;
+
+  &::placeholder {
+    color: var(--secondary);
+  }
 `;

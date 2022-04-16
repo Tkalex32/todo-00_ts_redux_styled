@@ -61,6 +61,7 @@ const Filters = styled.div`
   border-radius: 10px;
   padding: 2px;
   box-sizing: content-box;
+  transition: all 0.3s ease;
 `;
 
 interface IButtonProps {

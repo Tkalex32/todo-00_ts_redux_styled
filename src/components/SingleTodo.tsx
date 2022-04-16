@@ -32,7 +32,11 @@ const SingleTodo: FC<SingleTodoProps> = ({ todo }) => {
         <Checkbox
           checked={todo.completed}
           onClick={() => dispatch(toggleTodo(todo.id))}
-        />
+        >
+          {todo.completed && (
+            <CheckIcon checked={todo.completed}>done</CheckIcon>
+          )}
+        </Checkbox>
         {edit ? (
           <TodoInput
             ref={inputRef}
@@ -84,14 +88,15 @@ interface ICheckedProps {
 }
 
 const Checkbox = styled.div<ICheckedProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 10px;
   width: 20px;
   height: 20px;
   border-radius: 10px;
   border: 1px solid var(--quaternary);
   background-color: ${(props) => (props.checked ? "#4caf50" : "var(--input)")};
-  background-image: ${(props) =>
-    props.checked ? `url(${iconCheck})` : "#fff"};
   background-repeat: no-repeat;
   background-position: center;
   background-size: 15px;
@@ -99,21 +104,43 @@ const Checkbox = styled.div<ICheckedProps>`
   transition: all 0.3s linear;
 `;
 
+const CheckIcon = styled.span<ICheckedProps>`
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga";
+
+  display: inline-block;
+  font-size: 20px;
+  text-align: center;
+  color: ${(props) => (props.checked ? "#fff" : "none")};
+`;
+
 const TodoInput = styled.input`
   width: 100%;
-  height: 40px;
-  border: 1px solid var(--quaternary);
+  height: 38px;
+  border: none;
   border-radius: 10px;
   padding: 0 10px;
   font-size: 16px;
   outline: none;
   background: var(--input);
   color: var(--secondary);
+  box-shadow: var(--inner-shadow2);
   transition: all 0.3s linear;
 `;
 
 const TodoText = styled.span<ICheckedProps>`
-  color: var(--secondary);
+  color: var(--color-text);
   text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
   cursor: ${(props) => (props.checked ? "default" : "pointer")};
   flex: 1;
