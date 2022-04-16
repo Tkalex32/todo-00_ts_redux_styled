@@ -7,10 +7,17 @@
 }
 
 body {
-  --color-bg: hsl(0, 0%, 94%);
+  --color-bg: rgba(216, 216, 216, 1);
+  --color-bg2: rgba(240, 240, 240, 1);
+  --bg-gradient: linear-gradient(to top, var(--color-bg), var(--color-bg2));
+  --bg-gradient2: -webkit-linear-gradient(
+    to top,
+    var(--color-bg),
+    var(--color-bg2)
+  );
   --color-item: rgba(240, 242, 245, 1);
   --color-text: rgba(93, 108, 126, 1);
-  --color-input: hsl(0, 0%, 52%);
+  --color-input: rgba(133, 133, 133, 1);
   --input: rgb(255, 255, 255);
   --switch-bg: rgb(222 226 231);
   --button: linear-gradient(146.45deg, #ffffff 14.49%, #cbd0d9 85.19%);
@@ -40,12 +47,19 @@ body {
 }
 
 body.dark {
-  --color-bg: hsl(207, 26%, 17%);
+  --color-bg: rgba(32, 44, 55, 1);
+  --color-bg2: rgba(64, 77, 88, 1);
+  --bg-gradient: linear-gradient(to top, var(--color-bg), var(--color-bg2));
+  --bg-gradient2: -webkit-linear-gradient(
+    to top,
+    var(--color-bg),
+    var(--color-bg2)
+  );
   --color-item: rgba(43, 57, 69, 1);
   --color-text: rgba(243, 246, 252, 0.593);
-  --color-input: hsl(0, 0%, 30%);
+  --color-input: rgba(77, 77, 77, 1);
   --input: rgba(235, 235, 245, 0.1);
-  --switch-bg: #1e2830;
+  --switch-bg: rgba(30, 40, 48, 1);
   --button: linear-gradient(146.45deg, #55616a 14.49%, #222e37 85.19%);
   --button-hover: linear-gradient(146.45deg, #222e37 14.49%, #55616a 85.19%);
   --button-circle1: linear-gradient(180deg, #222e37 0%, #55616a 100%);

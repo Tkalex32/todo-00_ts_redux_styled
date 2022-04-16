@@ -2,7 +2,6 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "../app/hooks";
 import { toggleTodo, updateTodo } from "../features/todo/todoSlice";
 import styled from "styled-components";
-import iconCheck from "../assets/icon-check.svg";
 import Modal from "./Modal";
 
 interface SingleTodoProps {

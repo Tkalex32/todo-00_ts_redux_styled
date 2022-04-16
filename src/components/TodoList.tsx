@@ -82,6 +82,7 @@ export default TodoList;
 const Container = styled.div`
   background-color: var(--color-item);
   width: 100%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;

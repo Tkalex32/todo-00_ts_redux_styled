@@ -19,7 +19,9 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background-color: var(--color-background);
+  background: var(--color-background);
+  background: var(--bg-gradient2);
+  background: var(--bg-gradient);
   padding: 20px;
   transition: all 0.3s linear;
 `;
